@@ -42,9 +42,9 @@ class Articles extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'content' => 'Content',
-            'date' => 'Date',
+            'title' => 'Название',
+            'content' => 'Содержание',
+            'date' => 'Дата',
         ];
     }
 }

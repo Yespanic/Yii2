@@ -1,36 +1,30 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Articles';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Мой первый блог';
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Articles', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Панель администратора', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <div>
+        <?php foreach($articles as $article): ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                <h3><a href="view.php?id=<?=$article['id']?>"><?=$article['title']?></a></h3>
+                <em>Опубликовано: <?=$article['date']?></em>
+                <p><?=$article['content']?></p>
 
-            'id',
-            'title',
-            'content:ntext',
-            'date',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+        <?php endforeach ?>
+    </div>
 
 
 </div>

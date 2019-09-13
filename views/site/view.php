@@ -6,10 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Articles */
 
-$this->title = $model->title;
+$this->title = 'Мой первый блог';
 $this->params['breadcrumbs'][] = ['label' => 'Articles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+
 ?>
 <div class="articles-view">
 

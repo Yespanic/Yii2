@@ -35,12 +35,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Articles::find(),
-        ]);
+        $articles = Articles::find()->all();
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'articles' => $articles,
         ]);
     }
 
@@ -52,8 +50,9 @@ class SiteController extends Controller
      */
     public function actionView($id)
     {
+        $article = Articles::find()->where('id')->one();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'article' => $article($id),
         ]);
     }
 
