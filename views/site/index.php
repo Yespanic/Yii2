@@ -12,16 +12,13 @@ $this->title = 'Мой первый блог';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Панель администратора', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <p><?= Html::a('Панель администратора', ['create'], ['class' => 'btn btn-success']) ?></p>
 
     <div>
         <?php foreach($articles as $article): ?>
-
-                <h3><a href="view.php?id=<?=$article['id']?>"><?=$article['title']?></a></h3>
+           <h3> <?= Html::a($article['title'], ['read', 'id'=>$article['id']]) ?> </h3>
                 <em>Опубликовано: <?=$article['date']?></em>
-                <p><?=$article['content']?></p>
+                <p><?=mb_substr($article['content'], 0, 500)?></p>
 
         <?php endforeach ?>
     </div>

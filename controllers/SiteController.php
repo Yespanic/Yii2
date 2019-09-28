@@ -8,6 +8,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\rbac\UserGroupRule;
+use yii\commands\RbacController;
 
 /**
  * SiteController implements the CRUD actions for Articles model.
@@ -23,7 +25,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['ARTICLES'],
                 ],
             ],
         ];
@@ -48,12 +50,24 @@ class SiteController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionRead($id)
     {
-        $article = Articles::find()->where('id')->one();
-        return $this->render('view', [
-            'article' => $article($id),
+        $article = Articles::find()->where(['id' => $id])->one();
+        return $this->render('read', [
+            'article' => $article
         ]);
+    }
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            if (!\Yii::$app->user->can($action->id)) {
+                //throw new ForbiddenHttpException('Access denied');
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
