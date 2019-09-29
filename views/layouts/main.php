@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+$this->title='Мой первый блог';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -32,13 +33,19 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+
+        <h1><?= Html::a($this->title, ['/']) ?></h1>
+        <p><?= Html::a('Панель администратора', ['/articles'], ['class' => 'btn btn-link']) ?></p>
+
         <?= $content ?>
     </div>
 
 </div>
 
 <footer class="footer">
-    <p>Мой Первый Блог <br><img src="cc.png" alt="creative commons"></p>
+    <div class="container">
+    <p>Мой Первый Блог <br><img src="../../cc.png" alt="creative commons"></p>
+    </div>
 </footer>
 
 <?php $this->endBody() ?>
