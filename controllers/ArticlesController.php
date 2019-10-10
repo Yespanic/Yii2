@@ -4,26 +4,49 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Articles;
+use app\models\User;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\db\Migration;
+use yii\web\UrlManager;
 
 /**
  * ArticlesController implements the CRUD actions for Articles model.
  */
+
 class ArticlesController extends Controller
 {
     /**
      * {@inheritdoc}
      */
+
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                        'denyCallback' => function($rule, $action) {
+                            return $this->redirect(Url::toRoute(['/articles/login']));
+                        }
+                    ],
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            /** @var User $user */
+                            $user = Yii::$app->user->getIdentity();
+                            return $user->isAdmin() || $user->isModer();
+                        }
+                    ],
                 ],
             ],
         ];
@@ -125,3 +148,4 @@ class ArticlesController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
+

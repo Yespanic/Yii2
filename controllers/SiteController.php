@@ -56,18 +56,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function beforeAction($action)
-    {
-        if (parent::beforeAction($action)) {
-            if (!\Yii::$app->user->can($action->id)) {
-                //throw new ForbiddenHttpException('Access denied');
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     /**
      * Finds the Articles model based on its primary key value.
