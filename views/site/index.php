@@ -5,10 +5,14 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+$this->title = 'Мой первый блог';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-index">
 
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p><?= Html::a('Панель администратора', ['create'], ['class' => 'btn btn-success']) ?></p>
 
     <div>
         <?php foreach($articles as $article): ?>

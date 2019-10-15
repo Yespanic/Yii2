@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'date')->input('date') ?>
+    <?= $form->field($model, 'date')->textInput() ?>
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
