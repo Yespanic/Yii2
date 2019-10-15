@@ -21,7 +21,7 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-//            'enableAutoLogin' => true,
+            'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -56,7 +56,7 @@ $config = [
 
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
-            'defaultRoles' => ['ADMIN', 'MODER', 'USER'], // Здесь нет роли "guest", т.к. эта роль виртуальная и не присутствует в модели UserExt
+            'defaultRoles' => ['admin', 'BRAND', 'TALENT'], // Здесь нет роли "guest", т.к. эта роль виртуальная и не присутствует в модели UserExt
         ],
     ],
     'params' => $params,

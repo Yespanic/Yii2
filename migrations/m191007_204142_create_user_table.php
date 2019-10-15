@@ -12,12 +12,9 @@ class m191007_204142_create_user_table extends Migration
      */
     public function safeUp()
     {
-        /*
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
         ]);
-        */
-        $this->addColumn('{{%user}}', 'role', $this->smallInteger()->after('login')->defaultValue(1));
     }
 
     /**
@@ -25,7 +22,6 @@ class m191007_204142_create_user_table extends Migration
      */
     public function safeDown()
     {
-    //    $this->dropTable('{{%user}}');
-        $this->dropColumn('{{%user}}', 'role');
+        $this->dropTable('{{%user}}');
     }
 }
