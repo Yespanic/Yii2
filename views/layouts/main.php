@@ -36,7 +36,9 @@ $this->title='Мой первый блог';
 
         <h1><?= Html::a($this->title, ['/']) ?></h1>
         <p><?= Html::a('Панель администратора', ['/articles'], ['class' => 'btn btn-link']) ?></p>
-
+        <?php if(!Yii::$app->user->isGuest): ?>
+            <p><a href="<?=\yii\helpers\Url::toRoute(['site/logout'])?>">Выход</a></p>
+        <?php endif; ?>
         <?= $content ?>
     </div>
 

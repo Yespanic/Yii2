@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Articles;
+use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -20,6 +21,22 @@ class ArticlesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => [
+                            'index',
+                            'read',
+                            'delete',
+                            'create',
+                            'update',
+                        ],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

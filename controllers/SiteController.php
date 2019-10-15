@@ -5,11 +5,10 @@ namespace app\controllers;
 use Yii;
 use app\models\Articles;
 use yii\data\ActiveDataProvider;
+use app\models\LoginForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\rbac\UserGroupRule;
-use yii\commands\RbacController;
 
 /**
  * SiteController implements the CRUD actions for Articles model.
@@ -136,5 +135,39 @@ class SiteController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Login action.
+     *
+     * @return Response|string
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+
+        $model->password = '';
+        return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 }
